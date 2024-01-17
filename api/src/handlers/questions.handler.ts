@@ -1,6 +1,15 @@
-import { db } from "../db/connection";
-import { questions } from "../db/schema";
+import questionsRepository from "../repositories/questions.repository";
 
 export async function findAll() {
-  return await db.select().from(questions);
+  return await questionsRepository.findAll();
+}
+
+export async function findById(id: number) {
+  const question = await questionsRepository.findById(id);
+
+  if (!question) {
+    throw new Error("Questão não encontrada");
+  }
+
+  return question;
 }
