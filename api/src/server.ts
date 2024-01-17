@@ -1,7 +1,6 @@
 import { Elysia } from "elysia";
+import { questionsRoutes } from "./routes/questions.route";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
-
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+new Elysia()
+  .use(questionsRoutes)
+  .listen(3001, () => console.log("Server started at port 3001"));
