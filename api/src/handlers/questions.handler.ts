@@ -1,3 +1,4 @@
+import { AddQuestionDTO } from "../dtos/questions";
 import questionsRepository from "../repositories/questions.repository";
 
 export async function findAll() {
@@ -12,4 +13,12 @@ export async function findById(id: number) {
   }
 
   return question;
+}
+
+export async function add(data: AddQuestionDTO) {
+  return await questionsRepository.add(data);
+}
+
+export async function deleteById(id: number) {
+  return await questionsRepository.deleteById(id);
 }
