@@ -1,0 +1,1 @@
+ALTER TABLE "answers" ADD COLUMN "question_id" integer;

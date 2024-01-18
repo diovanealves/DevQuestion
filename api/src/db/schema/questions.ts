@@ -1,4 +1,6 @@
+import { relations } from "drizzle-orm";
 import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { answers } from "./answers";
 
 export const questions = pgTable("questions", {
   id: serial("id").primaryKey(),
@@ -11,3 +13,7 @@ export const questions = pgTable("questions", {
     withTimezone: true,
   }).defaultNow(),
 });
+
+export const questionsRelations = relations(questions, ({ many }) => ({
+  answers: many(answers),
+}));
