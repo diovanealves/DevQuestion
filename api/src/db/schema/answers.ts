@@ -1,12 +1,15 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { randomUUID } from "node:crypto";
 import { questions } from "./questions";
 
 export const answers = pgTable("answers", {
-  id: serial("id").primaryKey(),
+  id: text("id")
+    .$defaultFn(() => randomUUID())
+    .primaryKey(),
   text: text("text").notNull(),
   likes: integer("likes").notNull(),
-  questionId: integer("question_id"),
+  questionId: text("question_id").notNull(),
   createdAt: timestamp("created_at", {
     withTimezone: true,
   }).defaultNow(),
