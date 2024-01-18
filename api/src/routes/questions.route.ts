@@ -11,7 +11,7 @@ export const questionsRoutes = (app: Elysia) => (
     return findAll();
   }),
   app.get("/question/:id", async ({ params }) => {
-    return findById(parseInt(params.id));
+    return findById(params.id);
   }),
   app.post(
     "/question",
@@ -29,7 +29,7 @@ export const questionsRoutes = (app: Elysia) => (
     }
   ),
   app.delete("/question/:id", async ({ params }) => {
-    await deleteById(parseInt(params.id));
+    await deleteById(params.id);
     return {
       response: "Deleted Successfully",
     };

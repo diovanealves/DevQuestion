@@ -5,10 +5,12 @@ import { AddQuestionDTO } from "../dtos/questions";
 
 class QuestionsRepository {
   async findAll() {
-    return await db.select().from(questions);
+    return await db.query.questions.findMany({
+      orderBy: (questions, { desc }) => [desc(questions.createdAt)],
+    });
   }
 
-  async findById(id: number) {
+  async findById(id: string) {
     return await db.query.questions.findFirst({
       where: eq(questions.id, id),
       with: { answers: true },
@@ -21,7 +23,7 @@ class QuestionsRepository {
       .values({ title: data.title, description: data.description });
   }
 
-  async deleteById(id: number) {
+  async deleteById(id: string) {
     return await db.delete(questions).where(eq(questions.id, id));
   }
 }

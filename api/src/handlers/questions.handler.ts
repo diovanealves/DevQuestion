@@ -5,7 +5,7 @@ export async function findAll() {
   return await questionsRepository.findAll();
 }
 
-export async function findById(id: number) {
+export async function findById(id: string) {
   const question = await questionsRepository.findById(id);
 
   if (!question) {
@@ -19,6 +19,6 @@ export async function add(data: AddQuestionDTO) {
   return await questionsRepository.add(data);
 }
 
-export async function deleteById(id: number) {
+export async function deleteById(id: string) {
   return await questionsRepository.deleteById(id);
 }
