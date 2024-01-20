@@ -1,23 +1,28 @@
-import { AddAnswersDTO } from "../dtos/answers/AddAnswers.dto";
 import answersRepository from "../repositories/answers.repository";
-import { findById } from "./questions.handler";
+import questionsHandler from "./questions.handler";
 
-export async function getById(id: string) {
-  const answers = await answersRepository.findById(id);
+class answersHandler {
+  async findById(id: string) {
+    const answer = await answersRepository.findById(id);
 
-  if (!answers) {
-    throw new Error("Resposta não encontrada");
+    if (!answer) {
+      throw new Error("Answer Not Found");
+    }
+
+    return answer;
   }
 
-  return answers;
+  async add(questionId: string, text: string) {
+    await questionsHandler.findById(questionId);
+
+    return await answersRepository.add(questionId, text);
+  }
+
+  async delete(id: string) {
+    await this.findById(id);
+
+    return await answersRepository.delete(id);
+  }
 }
 
-export async function add(data: AddAnswersDTO) {
-  await findById(data.questionId);
-
-  return await answersRepository.add(data);
-}
-
-export async function deleteById(id: string) {
-  return await answersRepository.delete(id);
-}
+export default new answersHandler();
