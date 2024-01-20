@@ -13,18 +13,21 @@ class QuestionsRepository {
   async findById(id: string) {
     return await db.query.questions.findFirst({
       where: eq(questions.id, id),
-      with: { answers: true },
     });
   }
 
   async add(data: AddQuestionDTO) {
     return await db
       .insert(questions)
-      .values({ title: data.title, description: data.description });
+      .values({ title: data.title, description: data.description })
+      .returning();
   }
 
   async deleteById(id: string) {
-    return await db.delete(questions).where(eq(questions.id, id));
+    return await db
+      .delete(questions)
+      .where(eq(questions.id, id))
+      .returning({ id: questions.id });
   }
 }
 

@@ -1,7 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db/connection";
 import { answers } from "../db/schema";
-import { AddAnswersDTO } from "../dtos/answers/AddAnswers.dto";
 
 class answersRepository {
   async findById(id: string) {
@@ -10,16 +9,8 @@ class answersRepository {
     });
   }
 
-  async add(data: AddAnswersDTO) {
-    return await db
-      .insert(answers)
-      .values({ text: data.text, questionId: data.questionId })
-      .returning({
-        id: answers.id,
-        text: answers.text,
-        likes: answers.likes,
-        questionId: answers.questionId,
-      });
+  async add(questionId: string, text: string) {
+    return await db.insert(answers).values({ text, questionId }).returning();
   }
 
   async delete(id: string) {
