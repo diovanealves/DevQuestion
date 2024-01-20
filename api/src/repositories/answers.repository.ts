@@ -7,11 +7,20 @@ class answersRepository {
   async add(data: AddAnswersDTO) {
     return await db
       .insert(answers)
-      .values({ text: data.text, questionId: data.questionId });
+      .values({ text: data.text, questionId: data.questionId })
+      .returning({
+        id: answers.id,
+        text: answers.text,
+        likes: answers.likes,
+        questionId: answers.questionId,
+      });
   }
 
   async delete(id: string) {
-    return await db.delete(answers).where(eq(answers.id, id));
+    return await db
+      .delete(answers)
+      .where(eq(answers.id, id))
+      .returning({ id: answers.id });
   }
 }
 
