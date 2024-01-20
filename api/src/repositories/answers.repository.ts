@@ -4,6 +4,12 @@ import { answers } from "../db/schema";
 import { AddAnswersDTO } from "../dtos/answers/AddAnswers.dto";
 
 class answersRepository {
+  async findById(id: string) {
+    return await db.query.answers.findFirst({
+      where: eq(answers.id, id),
+    });
+  }
+
   async add(data: AddAnswersDTO) {
     return await db
       .insert(answers)

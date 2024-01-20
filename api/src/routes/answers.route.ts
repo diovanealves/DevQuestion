@@ -1,7 +1,10 @@
 import Elysia, { t } from "elysia";
-import { add, deleteById } from "../handlers/answers.handler";
+import { add, deleteById, getById } from "../handlers/answers.handler";
 
 export const answersRoutes = (app: Elysia) => (
+  app.get("/answers/:id", async ({ params }) => {
+    return getById(params.id);
+  }),
   app.post(
     "/answers",
     async ({ body }) => {
