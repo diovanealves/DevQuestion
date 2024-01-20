@@ -1,25 +1,17 @@
 import { Elysia, t } from "elysia";
-import {
-  add,
-  deleteById,
-  findAll,
-  findById,
-} from "../handlers/questions.handler";
+import questionsHandler from "../handlers/questions.handler";
 
 export const questionsRoutes = (app: Elysia) => (
   app.get("/question", async () => {
-    return findAll();
+    return questionsHandler.findAll();
   }),
   app.get("/question/:id", async ({ params }) => {
-    return findById(params.id);
+    return questionsHandler.findById(params.id);
   }),
   app.post(
     "/question",
     async ({ body }) => {
-      await add(body);
-      return {
-        response: "Created Successfully",
-      };
+      return questionsHandler.add(body);
     },
     {
       body: t.Object({
@@ -29,9 +21,6 @@ export const questionsRoutes = (app: Elysia) => (
     }
   ),
   app.delete("/question/:id", async ({ params }) => {
-    await deleteById(params.id);
-    return {
-      response: "Deleted Successfully",
-    };
+    return questionsHandler.deleteById(params.id);
   })
 );

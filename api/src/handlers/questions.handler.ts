@@ -1,24 +1,30 @@
-import { AddQuestionDTO } from "../dtos/questions";
 import questionsRepository from "../repositories/questions.repository";
+import { AddQuestionDTO } from "./../dtos/questions/AddQuestion.dto";
 
-export async function findAll() {
-  return await questionsRepository.findAll();
-}
-
-export async function findById(id: string) {
-  const question = await questionsRepository.findById(id);
-
-  if (!question) {
-    throw new Error("Questão não encontrada");
+class questionsHandler {
+  async findAll() {
+    return await questionsRepository.findAll();
   }
 
-  return question;
+  async findById(id: string) {
+    const question = await questionsRepository.findById(id);
+
+    if (!question) {
+      throw new Error("Question Not Found");
+    }
+
+    return question;
+  }
+
+  async add(data: AddQuestionDTO) {
+    return await questionsRepository.add(data);
+  }
+
+  async deleteById(id: string) {
+    await this.findById(id);
+
+    return await questionsRepository.deleteById(id);
+  }
 }
 
-export async function add(data: AddQuestionDTO) {
-  return await questionsRepository.add(data);
-}
-
-export async function deleteById(id: string) {
-  return await questionsRepository.deleteById(id);
-}
+export default new questionsHandler();
