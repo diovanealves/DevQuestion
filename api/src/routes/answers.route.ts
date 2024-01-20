@@ -1,29 +1,22 @@
 import Elysia, { t } from "elysia";
-import { add, deleteById, getById } from "../handlers/answers.handler";
+import answersHandler from "../handlers/answers.handler";
 
 export const answersRoutes = (app: Elysia) => (
   app.get("/answers/:id", async ({ params }) => {
-    return getById(params.id);
+    return answersHandler.findById(params.id);
   }),
   app.post(
-    "/answers",
-    async ({ body }) => {
-      await add(body);
-      return {
-        response: "Created Successfully",
-      };
+    "/answer/:id",
+    async ({ params, body }) => {
+      return answersHandler.add(params.id, body.text);
     },
     {
       body: t.Object({
         text: t.String(),
-        questionId: t.String(),
       }),
     }
   ),
-  app.delete("/answers/:id", async ({ params }) => {
-    await deleteById(params.id);
-    return {
-      response: "Deleted Successfully",
-    };
+  app.delete("/answer/:id", async ({ params }) => {
+    return await answersHandler.delete(params.id);
   })
 );
