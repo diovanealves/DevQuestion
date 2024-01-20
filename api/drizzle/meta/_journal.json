@@ -29,6 +29,13 @@
       "when": 1705543129801,
       "tag": "0003_unknown_vivisector",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1705719158270,
+      "tag": "0004_wide_shocker",
+      "breakpoints": true
     }
   ]
 }

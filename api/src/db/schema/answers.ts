@@ -8,7 +8,7 @@ export const answers = pgTable("answers", {
     .$defaultFn(() => randomUUID())
     .primaryKey(),
   text: text("text").notNull(),
-  likes: integer("likes").notNull(),
+  likes: integer("likes").default(0).notNull(),
   questionId: text("question_id").notNull(),
   createdAt: timestamp("created_at", {
     withTimezone: true,
