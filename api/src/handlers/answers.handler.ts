@@ -7,3 +7,7 @@ export async function add(data: AddAnswersDTO) {
 
   return await answersRepository.add(data);
 }
+
+export async function deleteById(id: string) {
+  return await answersRepository.delete(id);
+}

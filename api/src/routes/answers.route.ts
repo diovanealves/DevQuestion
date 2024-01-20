@@ -1,7 +1,7 @@
 import Elysia, { t } from "elysia";
-import { add } from "../handlers/answers.handler";
+import { add, deleteById } from "../handlers/answers.handler";
 
-export const answersRoutes = (app: Elysia) =>
+export const answersRoutes = (app: Elysia) => (
   app.post(
     "/answers",
     async ({ body }) => {
@@ -16,4 +16,11 @@ export const answersRoutes = (app: Elysia) =>
         questionId: t.String(),
       }),
     }
-  );
+  ),
+  app.delete("/answers/:id", async ({ params }) => {
+    await deleteById(params.id);
+    return {
+      response: "Deleted Successfully",
+    };
+  })
+);
