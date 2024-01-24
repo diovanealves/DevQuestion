@@ -13,6 +13,7 @@ class QuestionsRepository {
   async findById(id: string) {
     return await db.query.questions.findFirst({
       where: eq(questions.id, id),
+      with: { answers: true },
     });
   }
 
