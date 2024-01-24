@@ -36,6 +36,13 @@
       "when": 1705719158270,
       "tag": "0004_wide_shocker",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1706061476614,
+      "tag": "0005_bizarre_rogue",
+      "breakpoints": true
     }
   ]
 }
