@@ -9,7 +9,7 @@ export const categories = pgTable("categories", {
   id: text("id")
     .$defaultFn(() => randomUUID())
     .primaryKey(),
-  name: nameEnum("name"),
+  name: nameEnum("name").unique(),
   createdAt: timestamp("created_at", {
     withTimezone: true,
   }).defaultNow(),
