@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "../db/connection";
 import { questions } from "../db/schema";
 import { AddQuestionDTO } from "../dtos/questions";
+import { FindByCategory } from "../dtos/questions/findByCategory.dto";
 
 class QuestionsRepository {
   async findAll() {
@@ -17,10 +18,19 @@ class QuestionsRepository {
     });
   }
 
+  async findQuestionByCategory(data: FindByCategory) {
+    return await db.query.questions.findMany({
+      where: eq(questions.categoriesname, data.category),
+    });
+  }
+
   async add(data: AddQuestionDTO) {
     return await db
       .insert(questions)
-      .values({ title: data.title, description: data.description })
+      .values({
+        title: data.title,
+        description: data.description,
+      })
       .returning();
   }
 

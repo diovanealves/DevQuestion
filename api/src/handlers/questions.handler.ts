@@ -1,3 +1,4 @@
+import { FindByCategory } from "../dtos/questions/findByCategory.dto";
 import questionsRepository from "../repositories/questions.repository";
 import { AddQuestionDTO } from "./../dtos/questions/AddQuestion.dto";
 
@@ -14,6 +15,10 @@ class questionsHandler {
     }
 
     return question;
+  }
+
+  async findQuestionByCategory(data: FindByCategory) {
+    return await questionsRepository.findQuestionByCategory(data);
   }
 
   async add(data: AddQuestionDTO) {
