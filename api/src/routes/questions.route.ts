@@ -29,6 +29,7 @@ export const questionsRoutes = (app: Elysia) => (
       body: t.Object({
         title: t.String(),
         description: t.String(),
+        category: nameCategoryEnum,
       }),
     }
   ),

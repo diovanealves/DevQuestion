@@ -30,6 +30,7 @@ class QuestionsRepository {
       .values({
         title: data.title,
         description: data.description,
+        categoriesname: data.category,
       })
       .returning();
   }
