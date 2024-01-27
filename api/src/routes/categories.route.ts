@@ -11,6 +11,9 @@ export const categoriesRoutes = (app: Elysia) => (
   app.get("/category", async () => {
     return await categoriesHandler.findAll();
   }),
+  app.get("/category/:id", async ({ params }) => {
+    return await categoriesHandler.findById(params.id);
+  }),
   app.post(
     "/category",
     async ({ body }) => {
@@ -21,5 +24,8 @@ export const categoriesRoutes = (app: Elysia) => (
         name: nameCategoryEnum,
       }),
     }
-  )
+  ),
+  app.delete("/category/:id", async ({ params }) => {
+    return await categoriesHandler.deleteById(params.id);
+  })
 );
