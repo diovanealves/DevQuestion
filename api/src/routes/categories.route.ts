@@ -4,7 +4,8 @@ import categoriesHandler from "../handlers/categories.handler";
 export const nameCategoryEnum = t.Enum({
   "Front-End": "Front-End",
   "Back-End": "Back-End",
-  "Mobile": "Mobile",
+  Mobile: "Mobile",
+  DevOps: "DevOps",
 });
 
 export const categoriesRoutes = (app: Elysia) => (

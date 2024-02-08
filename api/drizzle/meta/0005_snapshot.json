@@ -137,7 +137,8 @@
       "values": {
         "Front-End": "Front-End",
         "Back-End": "Back-End",
-        "Mobile": "Mobile"
+        "Mobile": "Mobile",
+        "DevOps": "DevOps"
       }
     }
   },

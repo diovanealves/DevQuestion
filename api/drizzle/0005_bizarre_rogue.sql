@@ -1,5 +1,5 @@
 DO $$ BEGIN
- CREATE TYPE "name" AS ENUM('Front-End', 'Back-End', 'Mobile');
+ CREATE TYPE "name" AS ENUM('Front-End', 'Back-End', 'Mobile', "DevOps");
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

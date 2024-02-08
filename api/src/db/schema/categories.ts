@@ -3,7 +3,12 @@ import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { randomUUID } from "node:crypto";
 import { questions } from "./questions";
 
-export const nameEnum = pgEnum("name", ["Front-End", "Back-End", "Mobile"]);
+export const nameEnum = pgEnum("name", [
+  "Front-End",
+  "Back-End",
+  "Mobile",
+  "DevOps",
+]);
 
 export const categories = pgTable("categories", {
   id: text("id")

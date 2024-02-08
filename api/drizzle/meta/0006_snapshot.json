@@ -84,9 +84,7 @@
         "categories_name_unique": {
           "name": "categories_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       }
     },
@@ -145,7 +143,8 @@
       "values": {
         "Front-End": "Front-End",
         "Back-End": "Back-End",
-        "Mobile": "Mobile"
+        "Mobile": "Mobile",
+        "DevOps": "DevOps"
       }
     }
   },
