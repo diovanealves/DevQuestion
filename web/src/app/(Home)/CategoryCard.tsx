@@ -8,7 +8,7 @@ interface CategoryCardProps extends VariantProps<typeof cardVariant> {
 }
 
 const cardVariant = tv({
-  base: "flex flex-col items-center justify-center gap-2 rounded-lg px-6 py-5 text-center text-lg font-bold text-white cursor-pointer hover:scale-110 hover:opacity-75 transition-colors",
+  base: "flex h-24 cursor-pointer items-center justify-between gap-6 rounded-lg px-6 py-5 text-white transition-all hover:scale-105 hover:opacity-85",
   variants: {
     backgroundColor: {
       "Front-End": "bg-categoryCard-Web",

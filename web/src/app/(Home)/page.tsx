@@ -4,14 +4,22 @@ import CategoryCard from "./CategoryCard";
 export default function Category() {
   return (
     <div className="flex h-screen flex-col items-center justify-center p-2">
-      <h1 className="mb-14 text-3xl font-bold">DevQuestion</h1>
+      <h1 className="text-4xl font-black">DevQuestion</h1>
+      <p className="mb-6 mt-2 text-sm opacity-75">
+        Pergunte, Responda e Aprenda.
+      </p>
 
-      <h1 className="font-mediu mb-3 text-lg">Escolha uma categoria abaixo!</h1>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-4  md:gap-8">
+      <h1 className="mb-3 text-center text-lg font-medium">
+        Selecione uma categoria para publicar a sua pergunta!
+      </h1>
+      <div className="grid w-11/12 max-w-4xl grid-cols-1 gap-3 md:grid-cols-2 md:gap-3">
         {mockCategories.map((category) => (
           <CategoryCard key={category.id} variant={category.name}>
-            <category.icon size={38} />
-            {category.name}
+            <category.icon size={34} />
+            <div className="w-80">
+              <h1 className="mb-1 text-xl font-black">{category.name}</h1>
+              <p className="text-sm opacity-85">{category.description}</p>
+            </div>
           </CategoryCard>
         ))}
       </div>
