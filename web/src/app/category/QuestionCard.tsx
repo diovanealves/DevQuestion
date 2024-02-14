@@ -1,8 +1,9 @@
 import { Question } from "@/types/question.types";
 import { Forward } from "lucide-react";
 import Link from "next/link";
+import { memo } from "react";
 
-export default function QuestionCard(props: Question) {
+const QuestionCard = memo(function Card(props: Question) {
   return (
     <div className="mt-6 flex items-center justify-between rounded-lg border-2 border-gray-500 px-5 py-4">
       <div>
@@ -10,11 +11,13 @@ export default function QuestionCard(props: Question) {
         <p className="mt-2 text-sm opacity-85">{props.description}</p>
       </div>
       <Link
-        href="#"
+        href={`/question?category=${props.categoriesname}&questionId=${props.id}`}
         className="hover:text-slate-5000 rounded-lg border-2 border-slate-500 bg-slate-500 p-2 text-white  transition-colors hover:border-slate-500 hover:bg-white hover:text-slate-500"
       >
         <Forward size={36} />
       </Link>
     </div>
   );
-}
+});
+
+export default QuestionCard;
