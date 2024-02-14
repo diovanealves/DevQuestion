@@ -5,13 +5,15 @@ import { useQuestionById } from "@/hooks/useQuestions";
 import { redirect, useSearchParams } from "next/navigation";
 
 export default function Question() {
-  const questionId = useSearchParams().get("questionId");
+  const params = useSearchParams();
+  const category = params.get("category");
+  const questionId = params.get("questionId");
 
-  if (!questionId) {
+  if (!questionId || !category) {
     redirect("/");
   }
 
-  const { data, isLoading } = useQuestionById(questionId);
+  const { data, isLoading } = useQuestionById(category, questionId);
 
   if (isLoading) return <Loading />;
 

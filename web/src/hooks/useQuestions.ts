@@ -2,18 +2,33 @@ import {
   getQuestionById,
   getQuestionsByCategory,
 } from "@/services/questionService";
-import { useQuery } from "@tanstack/react-query";
+import { Question } from "@/types/question.types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useQuestionsByCategory(category: string) {
   return useQuery({
     queryKey: ["questions", category],
     queryFn: () => getQuestionsByCategory(category),
+    enabled: !!category,
   });
 }
 
-export function useQuestionById(id: string) {
+export function useQuestionById(category: string, id: string) {
+  const queryClient = useQueryClient();
+  const cachedQuestion = queryClient
+    .getQueryData<Question[]>(["questions", category])
+    ?.find((q) => q.id === id);
+
   return useQuery({
     queryKey: ["questions", id],
-    queryFn: () => getQuestionById(id),
+    queryFn: () => {
+      if (cachedQuestion) {
+        return cachedQuestion;
+      }
+
+      return getQuestionById(id);
+    },
+    enabled: !!id,
+    staleTime: Infinity,
   });
 }

@@ -11,7 +11,7 @@ const QuestionCard = memo(function Card(props: Question) {
         <p className="mt-2 text-sm opacity-85">{props.description}</p>
       </div>
       <Link
-        href={`/question?questionId=${props.id}`}
+        href={`/question?category=${props.categoriesname}&questionId=${props.id}`}
         className="hover:text-slate-5000 rounded-lg border-2 border-slate-500 bg-slate-500 p-2 text-white  transition-colors hover:border-slate-500 hover:bg-white hover:text-slate-500"
       >
         <Forward size={36} />

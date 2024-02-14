@@ -1,7 +1,6 @@
 "use server";
 
 import { api } from "@/lib/axios";
-import { Question } from "@/types/question.types";
 
 export async function getQuestionsByCategory(category: string) {
   try {
@@ -12,7 +11,7 @@ export async function getQuestionsByCategory(category: string) {
   }
 }
 
-export async function getQuestionById(id: string): Promise<Question> {
+export async function getQuestionById(id: string) {
   try {
     const response = await api.get(`/question/${id}`);
     return response.data;
