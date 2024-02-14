@@ -1,20 +1,21 @@
 import { Question } from "@/types/question.types";
-import { Forward } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { memo } from "react";
 
 const QuestionCard = memo(function Card(props: Question) {
   return (
-    <div className="mt-6 flex items-center justify-between rounded-lg border-2 border-gray-500 px-5 py-4">
+    <div className="flex h-32 flex-col justify-between rounded-lg border border-slate-400 border-opacity-60 px-3 py-3">
       <div>
-        <h1 className="text-xl font-bold leading-tight">{props.title}</h1>
-        <p className="mt-2 text-sm opacity-85">{props.description}</p>
+        <h1 className="text-xl font-semibold leading-relaxed">{props.title}</h1>
+        <p className="text-sm opacity-65">{props.description.slice(0, 85)}.</p>
       </div>
       <Link
         href={`/question?category=${props.categoriesname}&questionId=${props.id}`}
-        className="hover:text-slate-5000 rounded-lg border-2 border-slate-500 bg-slate-500 p-2 text-white  transition-colors hover:border-slate-500 hover:bg-white hover:text-slate-500"
+        className="flex w-28 items-center rounded-md border border-slate-400 px-2 hover:scale-105"
       >
-        <Forward size={36} />
+        Visualizar
+        <ChevronRight size={20} />
       </Link>
     </div>
   );
