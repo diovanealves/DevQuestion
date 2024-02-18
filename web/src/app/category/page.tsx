@@ -1,5 +1,6 @@
 "use client";
 
+import FormContent from "@/components/FormContent";
 import Loading from "@/components/Loading";
 import { useQuestionsByCategory } from "@/hooks/useQuestions";
 import { Question } from "@/types/question.types";
@@ -27,40 +28,42 @@ export default function Category() {
 
   return (
     <>
-      <div className="flex items-center gap-3 border-b border-slate-400 border-opacity-35 px-3 py-4">
-        <Link href="/" className="flex items-center gap-1">
-          <Home strokeWidth="2" />
-          <h1 className="font-medium">Home</h1>
-        </Link>
-        <ArrowRight width={16} />
-        <h1 className="font-bold">{category}</h1>
+      <div className="flex items-center justify-between border-b border-slate-400 border-opacity-35 px-2 py-4">
+        <div className="flex gap-1">
+          <Link href="/" className="flex items-center gap-1">
+            <Home strokeWidth="2" />
+            <h1 className="font-medium">Home</h1>
+          </Link>
+          <ArrowRight width={16} />
+          <h1 className="font-bold">{category}</h1>
+        </div>
+        <FormContent category={category} />
       </div>
 
-      <div className="px-3 py-8">
-        <h1 className="text-2xl font-bold">Perguntas sobre {category}</h1>
-        <p className="mb-5 text-sm opacity-75">
+      <div className="px-2 py-8">
+        <h1 className="text-xl font-bold">Perguntas sobre {category}</h1>
+        <p className="mb-5 text-xs opacity-75">
           Todas as perguntas relacionadas na plataforma
         </p>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {data.length > 0 ? (
+          {data.length > 0 &&
             data.map((question: Question) => (
               <QuestionCard key={question.id} {...question} />
-            ))
-          ) : (
-            <div>
-              Não há questões nessa categoria no momento. Que tal começar a
-              fazer uma pergunta?
-            </div>
-          )}
+            ))}
         </div>
-
-        <div className="mt-10 space-y-2 text-center">
-          <p>Não encontrou a resposta que procura? Faça sua pergunta</p>
-          <button className="rounded-md border-2 border-slate-400 px-3 py-2 font-medium hover:bg-slate-400 hover:text-white">
-            Faça uma pergunta
-          </button>
-        </div>
+        {data.length > 0 ? (
+          <div className="mt-10 space-y-2 text-center">
+            <p>Não encontrou a resposta que procura? Faça sua pergunta</p>
+            <FormContent category={category} />
+          </div>
+        ) : (
+          <div className="mx-auto flex w-11/12 max-w-sm flex-col gap-3 text-center">
+            Não há questões nessa categoria no momento. Que tal começar a fazer
+            uma pergunta?
+            <FormContent category={category} />
+          </div>
+        )}
       </div>
     </>
   );

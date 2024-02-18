@@ -8,7 +8,7 @@ const QuestionCard = memo(function Card(props: Question) {
     <div className="flex h-32 flex-col justify-between rounded-lg border border-slate-400 border-opacity-60 px-3 py-3">
       <div>
         <h1 className="text-xl font-semibold leading-relaxed">{props.title}</h1>
-        <p className="text-sm opacity-65">{props.description.slice(0, 85)}.</p>
+        <p className="text-sm opacity-65">{props.description.slice(0, 50)}..</p>
       </div>
       <Link
         href={`/question?category=${props.categoriesname}&questionId=${props.id}`}

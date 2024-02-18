@@ -1,5 +1,5 @@
+import CategoryCard from "@/components/CategoryCard";
 import { mockCategories } from "@/mocks/categories.mock";
-import CategoryCard from "./CategoryCard";
 
 export default function Category() {
   return (
