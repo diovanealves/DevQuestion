@@ -1,7 +1,7 @@
 import CategoryCard from "@/components/CategoryCard";
 import { mockCategories } from "@/mocks/categories.mock";
 
-export default function Category() {
+export default function Home() {
   return (
     <div className="flex h-screen flex-col items-center justify-center p-2">
       <h1 className="text-4xl font-black">DevQuestion</h1>

@@ -6,3 +6,9 @@ export interface Question {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CreateQuestion {
+  title: string;
+  description: string;
+  category: string;
+}

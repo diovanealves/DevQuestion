@@ -1,15 +1,13 @@
+"use client";
+
+import { useCreateQuestionMutate } from "@/hooks/useQuestions";
 import { mockCategories } from "@/mocks/categories.mock";
+import { CreateQuestion } from "@/types/question.types";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CategoryCard from "./CategoryCard";
-
-interface FormContent {
-  title: string;
-  description: string;
-  category: string;
-}
 
 const FormContent = memo(function FormContent({
   category,
@@ -21,14 +19,22 @@ const FormContent = memo(function FormContent({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormContent>({ defaultValues: { category } });
+    trigger,
+  } = useForm<CreateQuestion>({ defaultValues: { category } });
+  const { data, mutate, isSuccess } = useCreateQuestionMutate();
+  const [isOpen, setIsOpen] = useState(false);
 
-  async function onSubmit(data: FormContent) {
+  function onSubmit(data: CreateQuestion) {
+    mutate(data);
     reset({ title: "", description: "", category: "" });
   }
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [isSuccess]);
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
         <button className="rounded-md border-2 border-slate-400 px-3 py-2 font-medium hover:bg-slate-400 hover:text-white">
           Faça uma pergunta

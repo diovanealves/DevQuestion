@@ -1,6 +1,7 @@
 "use server";
 
 import { api } from "@/lib/axios";
+import { CreateQuestion } from "@/types/question.types";
 
 export async function getQuestionsByCategory(category: string) {
   try {
@@ -17,5 +18,18 @@ export async function getQuestionById(id: string) {
     return response.data;
   } catch (error) {
     throw new Error("Error when searching for question");
+  }
+}
+
+export async function postQuestion(data: CreateQuestion) {
+  try {
+    const response = await api.post(`/question`, {
+      title: data.title,
+      description: data.description,
+      category: data.category,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Error when create for question");
   }
 }
