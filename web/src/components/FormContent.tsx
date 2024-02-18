@@ -36,7 +36,7 @@ const FormContent = memo(function FormContent({
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 backdrop-blur-md" />
-        <Dialog.Content className="absolute left-1/2 top-1/2 w-11/12 max-w-lg flex-1 -translate-x-1/2 rounded-lg border-2 border-slate-900 bg-white p-5">
+        <Dialog.Content className="fixed left-1/2 top-1/2 w-11/12 max-w-lg  -translate-x-1/2 -translate-y-1/2 rounded-lg border-2 border-slate-900 bg-white p-5">
           <div className="flex items-center justify-between">
             <Dialog.Title className="text-xl font-medium leading-relaxed">
               Adicionar nova questão
