@@ -7,7 +7,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import CategoryCard from "./CategoryCard";
+import { CheckBoxCategory } from "./CheckboxCategory";
 
 const FormContent = memo(function FormContent({
   category,
@@ -19,14 +19,15 @@ const FormContent = memo(function FormContent({
     handleSubmit,
     formState: { errors },
     reset,
-    trigger,
+    setValue,
   } = useForm<CreateQuestion>({ defaultValues: { category } });
-  const { data, mutate, isSuccess } = useCreateQuestionMutate();
+  const { mutate, isSuccess } = useCreateQuestionMutate();
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   function onSubmit(data: CreateQuestion) {
     mutate(data);
-    reset({ title: "", description: "", category: "" });
+    reset({ title: "", description: "", category });
   }
 
   useEffect(() => {
@@ -84,14 +85,23 @@ const FormContent = memo(function FormContent({
             {!category && (
               <div className="grid grid-cols-2 gap-3">
                 {mockCategories.map((category) => (
-                  <CategoryCard key={category.id} variant={category.name}>
+                  <CheckBoxCategory
+                    key={category.id}
+                    id={category.id}
+                    selectedId={selectedCategory}
+                    variant={category.name}
+                    onChange={() => {
+                      setValue("category", category.name);
+                      setSelectedCategory(category.id);
+                    }}
+                  >
                     <category.icon size={34} />
                     <div className="w-28">
                       <h1 className="mb-1 text-lg font-black">
                         {category.name}
                       </h1>
                     </div>
-                  </CategoryCard>
+                  </CheckBoxCategory>
                 ))}
               </div>
             )}
