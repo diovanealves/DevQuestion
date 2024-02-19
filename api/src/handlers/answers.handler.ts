@@ -12,6 +12,16 @@ class answersHandler {
     return answer;
   }
 
+  async findAnswersByQuestion(questionId: string) {
+    const answer = await answersRepository.findAnswersByQuestion(questionId);
+
+    if (!answer) {
+      throw new Error("There is no answer to this question");
+    }
+
+    return answer;
+  }
+
   async add(questionId: string, text: string) {
     await questionsHandler.findById(questionId);
 

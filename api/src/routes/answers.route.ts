@@ -5,6 +5,17 @@ export const answersRoutes = (app: Elysia) => (
   app.get("/answers/:id", async ({ params }) => {
     return answersHandler.findById(params.id);
   }),
+  app.get(
+    "/answers/question/:questionId",
+    async ({ params }) => {
+      return answersHandler.findAnswersByQuestion(params.questionId);
+    },
+    {
+      params: t.Object({
+        questionId: t.String(),
+      }),
+    }
+  ),
   app.post(
     "/answer/:id",
     async ({ params, body }) => {

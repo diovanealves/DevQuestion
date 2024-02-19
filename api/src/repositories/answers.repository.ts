@@ -9,6 +9,13 @@ class answersRepository {
     });
   }
 
+  async findAnswersByQuestion(questionId: string) {
+    return await db.query.answers.findMany({
+      where: eq(answers.questionId, questionId),
+      orderBy: (answers, { desc }) => [desc(answers.createdAt)],
+    });
+  }
+
   async add(questionId: string, text: string) {
     return await db.insert(answers).values({ text, questionId }).returning();
   }
