@@ -12,3 +12,22 @@ export interface CreateQuestion {
   description: string;
   category: string;
 }
+
+export interface QuestionAndAnswers {
+  id: string;
+  title: string;
+  description: string;
+  categoriesname: string;
+  createdAt: Date;
+  updatedAt: Date;
+  answers: answers[];
+}
+
+interface answers {
+  id: string;
+  text: string;
+  likes: number;
+  questionId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

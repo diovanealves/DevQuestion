@@ -21,6 +21,15 @@ export async function getQuestionById(id: string) {
   }
 }
 
+export async function getAnswersByQuestion(questionId: string) {
+  try {
+    const response = await api.get(`/answers/question/${questionId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error when searching for an answer to a question");
+  }
+}
+
 export async function postQuestion(data: CreateQuestion) {
   try {
     const response = await api.post(`/question`, {
