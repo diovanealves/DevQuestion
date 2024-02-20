@@ -57,8 +57,10 @@ export function useCreateQuestionMutate() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createQuestion,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["questions"] });
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["questions", variables.category],
+      });
     },
   });
 }
@@ -67,8 +69,10 @@ export function useCreateAnswersByQuestionMutate() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createAnswers,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["answers"] });
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["questions", variables.questionId],
+      });
     },
   });
 }
