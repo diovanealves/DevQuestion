@@ -1,8 +1,9 @@
 import {
+  createAnswers,
+  createQuestion,
   getAnswersByQuestion,
   getQuestionById,
   getQuestionsByCategory,
-  postQuestion,
 } from "@/services/questionService";
 import { Answers, Question, QuestionAndAnswers } from "@/types/question.types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -55,9 +56,19 @@ export function useAnswersByQuestion(questionId: string) {
 export function useCreateQuestionMutate() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: postQuestion,
+    mutationFn: createQuestion,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["questions"] });
+    },
+  });
+}
+
+export function useCreateAnswersByQuestionMutate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createAnswers,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["answers"] });
     },
   });
 }

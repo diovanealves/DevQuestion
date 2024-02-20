@@ -1,7 +1,7 @@
 "use server";
 
 import { api } from "@/lib/axios";
-import { CreateQuestion } from "@/types/question.types";
+import { CreateAnswer, CreateQuestion } from "@/types/question.types";
 
 export async function getQuestionsByCategory(category: string) {
   try {
@@ -30,7 +30,7 @@ export async function getAnswersByQuestion(questionId: string) {
   }
 }
 
-export async function postQuestion(data: CreateQuestion) {
+export async function createQuestion(data: CreateQuestion) {
   try {
     const response = await api.post(`/question`, {
       title: data.title,
@@ -40,5 +40,16 @@ export async function postQuestion(data: CreateQuestion) {
     return response.data;
   } catch (error) {
     throw new Error("Error when create for question");
+  }
+}
+
+export async function createAnswers(data: CreateAnswer) {
+  try {
+    const response = await api.post(`/answer/${data.questionId}`, {
+      text: data.text,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Error when create for Answers");
   }
 }

@@ -31,3 +31,8 @@ export interface Answers {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CreateAnswer {
+  questionId: string | null;
+  text: string;
+}
