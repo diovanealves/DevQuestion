@@ -20,10 +20,10 @@ export interface QuestionAndAnswers {
   categoriesname: string;
   createdAt: Date;
   updatedAt: Date;
-  answers: answers[];
+  answers: Answers[];
 }
 
-interface answers {
+export interface Answers {
   id: string;
   text: string;
   likes: number;

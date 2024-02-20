@@ -4,7 +4,7 @@ import {
   getQuestionsByCategory,
   postQuestion,
 } from "@/services/questionService";
-import { Question, QuestionAndAnswers } from "@/types/question.types";
+import { Answers, Question, QuestionAndAnswers } from "@/types/question.types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useQuestionsByCategory(category: string) {
@@ -25,14 +25,30 @@ export function useQuestionById(category: string, id: string) {
         .getQueryData<Question[]>(["questions", category])
         ?.find((q) => q.id === id);
 
-      const question = cachedQuestion
-        ? { ...cachedQuestion, answers: await getAnswersByQuestion(id) }
-        : await getQuestionById(id);
+      const cachedAnswers = queryClient
+        .getQueryData<Answers[]>(["answers", id])
+        ?.find((a) => a.questionId === id);
+
+      const question =
+        cachedQuestion && cachedAnswers
+          ? {
+              ...cachedQuestion,
+              answers: cachedAnswers || (await getAnswersByQuestion(id)),
+            }
+          : await getQuestionById(id);
 
       return question;
     },
     enabled: !!id,
     staleTime: Infinity,
+  });
+}
+
+export function useAnswersByQuestion(questionId: string) {
+  return useQuery({
+    queryKey: ["answers", questionId],
+    queryFn: () => getAnswersByQuestion(questionId),
+    enabled: !!questionId,
   });
 }
 
